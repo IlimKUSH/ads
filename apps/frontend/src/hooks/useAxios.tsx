@@ -10,7 +10,7 @@ export interface ApiResponse<D = never> {
   total?: number;
 }
 
-axios.defaults.baseURL = 'http://localhost:8080/api';
+axios.defaults.baseURL = '/api';
 export default function useAxios<T = ApiResponse>(
   axiosParams: AxiosRequestConfig
 ) {
