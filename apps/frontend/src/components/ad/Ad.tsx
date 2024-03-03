@@ -14,7 +14,15 @@ const Ad = ({ id }: { id: number }) => {
 
   const router = useRouter();
 
-  if (!response) return null;
+  if (!response)
+    return (
+      <Box>
+        <Button variant="outlined" onClick={() => router.push('/ads')}>
+          <Typography variant="h4">Go to main page</Typography>
+        </Button>
+        <Typography variant="h4">No data</Typography>
+      </Box>
+    );
 
   return loading ? (
     <Box

@@ -9,31 +9,32 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { useRouter } from 'next/navigation';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { IAd } from '../models/ads';
 
 interface IAdCardProps {
   data: IAd;
+  onRemove?: () => void;
 }
 
-const AdCard = ({ data }: IAdCardProps) => {
+const AdCard = ({ data, onRemove }: IAdCardProps) => {
   const router = useRouter();
-  const [isLiked, setIsLiked] = useState(false);
+  const [inFavorites, setInFavorites] = useState(false);
 
   const handleLikeClick = () => {
-    const likedAdsJson = localStorage.getItem('likedAds');
-    const likedAds: IAd[] =
-      likedAdsJson != null ? JSON.parse(likedAdsJson) : [];
-    const test = likedAds.some((ad) => ad.id === data.id);
+    const favAdsJson = localStorage.getItem('likedAds');
+    const favAds: IAd[] = favAdsJson != null ? JSON.parse(favAdsJson) : [];
+    const test = favAds.some((ad) => ad.id === data.id);
     if (!test) {
-      likedAds.push(data);
-      localStorage.setItem('likedAds', JSON.stringify(likedAds));
-      setIsLiked(true);
+      favAds.push(data);
+      localStorage.setItem('likedAds', JSON.stringify(favAds));
+      setInFavorites(true);
     } else {
-      const updatedLikedAds = likedAds.filter((ad) => ad.id !== data.id);
+      const updatedLikedAds = favAds.filter((ad) => ad.id !== data.id);
       localStorage.setItem('likedAds', JSON.stringify(updatedLikedAds));
-      setIsLiked(false);
+      setInFavorites(false);
     }
   };
 
@@ -41,7 +42,7 @@ const AdCard = ({ data }: IAdCardProps) => {
     const likedAdsJson = localStorage.getItem('likedAds');
     const likedAds: IAd[] =
       likedAdsJson != null ? JSON.parse(likedAdsJson) : [];
-    setIsLiked(likedAds.some((ad) => ad.id === data.id));
+    setInFavorites(likedAds.some((ad) => ad.id === data.id));
   }, [data.id]);
 
   return (
@@ -74,8 +75,8 @@ const AdCard = ({ data }: IAdCardProps) => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <IconButton onClick={handleLikeClick}>
-            <ThumbUpIcon color={isLiked ? 'primary' : 'inherit'} />
+          <IconButton onClick={onRemove ?? handleLikeClick}>
+            {inFavorites ? <FavoriteIcon /> : <FavoriteBorderIcon />}
           </IconButton>
         </CardActions>
       </Card>

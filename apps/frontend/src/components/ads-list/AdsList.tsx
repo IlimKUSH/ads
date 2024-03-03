@@ -6,6 +6,8 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useRouter } from 'next/navigation';
 import AdCard from '../AdCard';
 import Modal from '../ui/Modal';
 import useAxios from '../../hooks/useAxios';
@@ -28,6 +30,7 @@ const filterOptions: Record<string, string>[] = [
 ];
 
 const AdsList = () => {
+  const router = useRouter();
   const [open, setOpen] = React.useState(false);
   const [params, setParams] = React.useState<IFilterParams>({
     minPrice: '',
@@ -99,6 +102,13 @@ const AdsList = () => {
         <Typography variant="h1">List of ads</Typography>
         <Button variant="contained" onClick={handleToggle}>
           Filters
+        </Button>
+        <Button
+          variant="contained"
+          startIcon={<FavoriteIcon />}
+          onClick={() => router.push('/favorites')}
+        >
+          Favorite list
         </Button>
       </Box>
       <Box
