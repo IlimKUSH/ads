@@ -11,6 +11,10 @@
     "plugin:@typescript-eslint/recommended",
     "airbnb-typescript/base"
   ],
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "react/jsx-props-no-spreading": "off"
+  },
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
