@@ -1,15 +1,16 @@
+export interface Image {
+  id: number;
+  image: string;
+  thumbnail: string;
+  user: number;
+}
 export interface IAd {
   city_name: string;
   created_at: string;
   description: string;
   district_name: string;
   id: number;
-  images: {
-    id: number;
-    image: string;
-    thumbnail: string;
-    user: number;
-  }[];
+  images: Image[];
   price: number;
   title: string;
   user: number;

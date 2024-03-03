@@ -16,7 +16,7 @@ const contentStyle: SxProps<Theme> = {
   overflow: 'auto',
 };
 
-const Modal = ({ children, ...rest }: ModalProps) => (
+const Modal: React.FC<ModalProps> = ({ children, ...rest }) => (
   <MUIModal
     aria-labelledby="modal-modal-title"
     aria-describedby="modal-modal-description"

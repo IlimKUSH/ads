@@ -1,12 +1,21 @@
 'use client';
 
 import React from 'react';
-import { Box } from '@mui/material';
+import Head from 'next/head';
+import Ad from '../../../components/ad/Ad';
 
-const Page = () => (
-  <Box>
-    <Box>details</Box>
-  </Box>
-);
+const Page = ({ params }: { params: { id: number } }) => {
+  const { id } = params;
+
+  return (
+    <>
+      <Head>
+        <title>Ad</title>
+      </Head>
+
+      <Ad id={id} />
+    </>
+  );
+};
 
 export default Page;
